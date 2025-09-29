@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <h1><%= title %></h1>
+    <ul>
+      <% indexMessage.forEach((message) => { %>
+        <li>
+          <strong><%= message.user %>:</strong> <%= message.text %>
+          <em>(<%= message.added.toLocaleDateString() %>)</em>
+        </li>
+      <% }); %>
+
+      <button id="myButton" type="button">Open</button>
+      
+    </ul>
+
+    <script>
+      const myButton = document.getElementById('myButton');
+      
+      myButton.addEventListener('click', function() {
+        window.location.href = '/new';
+      });
+    </script>
+
+  </body>
+</html>
