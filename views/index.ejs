@@ -4,7 +4,7 @@
     <ul>
       <% indexMessage.forEach((message) => { %>
         <li>
-          <strong><%= message.user %>:</strong> <%= message.text %>
+          <strong><%= message.username %>:</strong> <%= message.text %>
           <em>(<%= message.added.toLocaleDateString() %>)</em>
         </li>
       <% }); %>

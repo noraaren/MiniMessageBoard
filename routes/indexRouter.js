@@ -1,38 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const db = require("../controllers/messages");
 
-const messages = [
-    {
-      text: "Hi there!",
-      user: "Amando",
-      added: new Date()
-    },
-    {
-      text: "Hello World!",
-      user: "Charles",
-      added: new Date()
-    }
-  ];
-
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  try {
+    const messages = await db.getAllMessages();
     res.render("index", { 
         title: "Mini Message Board",
         indexMessage: messages,
         name: messages.user
     });
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    res.status(500).send("Error loading messages");
+  }
 });
 
-router.post('/new', (req, res) =>{
-    const newMessage = {
-        text: req.body.message,
-        user: req.body.author, 
-        added: new Date()
-
-    }
-    
-    messages.push(newMessage)
-    res.redirect('/')
-
-});
+router.post('/new', db.insertMessage);
 
 module.exports = router;
